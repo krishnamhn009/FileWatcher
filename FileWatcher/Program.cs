@@ -53,7 +53,6 @@ namespace FileWatcher
         static bool IsValidDirectory(string path)
         {
 
-            Console.WriteLine("Entering Function IsDirectory()");
             // get the file attributes for file or directory
 
             //if (!Directory.Exists(@"C:\folderName")) return;
@@ -65,19 +64,13 @@ namespace FileWatcher
         }
 
         public static async void WatchDirectory(string targetDirectory,string filePattern)
-        {
-            // Process the list of files found in the directory.
-            //string[] fileEntries = Directory.GetFiles(targetDirectory,filePattern);
-            //foreach (string fileName in fileEntries)
-            //    ProcessFile(fileName);
-
+        {           
             await Task.Run(() => watch(targetDirectory, filePattern));
         }
 
      
         private static void watch(string path,string filePattern )
         {
-            Console.WriteLine("Entering  Function Watch() : Start Watching");
             FileSystemWatcher watcher = new FileSystemWatcher();
             watcher.Path = path;
             watcher.NotifyFilter = NotifyFilters.LastWrite;
@@ -92,30 +85,23 @@ namespace FileWatcher
         {
             Console.WriteLine("OnCreated Event Trigger");
             StringBuilder sb = new StringBuilder();
-            sb.Append(e.Name);
-            sb.Append(e.FullPath);
+            sb.Append("Name: "+e.Name);           
             sb.Append(" ");
-            sb.Append(e.ChangeType.ToString());
+            sb.Append("Event Type: "+e.ChangeType.ToString());
             sb.Append("    ");
-            sb.Append(DateTime.Now.ToString());
+            sb.Append("TimeStamp: "+DateTime.Now.ToString());
+            Console.WriteLine(sb);
         }
 
         private static void OnChanged(object source, FileSystemEventArgs e)
-        {
-            Console.WriteLine("OnChanged Event Trigger");
+        {            
             StringBuilder sb = new StringBuilder();
-            sb.Append(e.Name);
-            sb.Append(e.FullPath);
+            sb.Append("Name: " + e.Name);          
             sb.Append(" ");
-            sb.Append(e.ChangeType.ToString());
+            sb.Append("Event Type: " + e.ChangeType.ToString());
             sb.Append("    ");
-            sb.Append(DateTime.Now.ToString());
-
-            WatcherChangeTypes changeType=e.ChangeType;
-            string fileName = e.Name;
-            Console.WriteLine("File :" + fileName + "Changed");
-            //Copies file to another directory.
-            
+            sb.Append("TimeStamp: " + DateTime.Now.ToString());
+            Console.WriteLine(sb);
         }
 
     }
