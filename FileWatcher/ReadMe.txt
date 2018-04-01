@@ -1,4 +1,4 @@
-﻿In this exercise I will create a command-line program to watch for text files to be created or modified in a directory and
+﻿In this application will watch for text files to be created or modified in a directory and
 then output information about them.
 
 The program takes 2 arguments, the directory to watch and a file pattern, example: program.exe "c:\file folder" *.txt
